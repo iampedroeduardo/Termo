@@ -6,10 +6,10 @@ function CriaTab(){
             td=document.createElement("td");
             td.setAttribute("id",""+c+i);
             if(c==0){
-                td.style.border="2px solid black";
+                td.style.border="2px solid white";
                 td.style.background="transparent";
                 if(i==0){
-                    td.style.borderBottom="5px solid black";
+                    td.style.borderBottom="5px solid white";
                 }
             }
             tr.appendChild(td);
@@ -26,8 +26,10 @@ function CriaTeclado(){
             if(c==1 && i==letras[c].length-1){
                 img=new Image();
                 img.src="Imagens/apagar.png";
-                img.style.width="10px";
-                img.style.height="10px";
+                img.style.width="15px";
+                img.style.height="15px";
+                img.style.color="white";
+                img.style.filter="brightness(200%)"
                 input.appendChild(img);
                 input.setAttribute("onclick","if(pos[1]>0){TiraLetra();}");
             }
@@ -36,6 +38,7 @@ function CriaTeclado(){
                 input.appendChild(texto);
                 input.setAttribute("onclick","ColocaLetra('"+letras[c][i]+"')");
             }
+            input.setAttribute("class","teclado");
             div.appendChild(input);
         }
         if(c==2){
@@ -43,6 +46,7 @@ function CriaTeclado(){
             texto=document.createTextNode("ENTER");
             input.appendChild(texto);
             input.setAttribute("onclick","if(Posicao()==4){Testa()};");
+            input.setAttribute("class","enter");
             div.appendChild(input);
         }
         br=document.createElement("br");
@@ -52,14 +56,14 @@ function CriaTeclado(){
 }
 function ColocaLetra(letra){
     td=document.getElementById(""+pos[0]+pos[1]);
-    if(td.style.borderBottom=="5px solid black"){
+    if(td.style.borderBottom=="5px solid white"){
         console.log("entrou");
         td.innerHTML=letra;
-        td.style.borderBottom="2px solid black";
+        td.style.borderBottom="2px solid white";
         if(pos[1]<4){
             pos[1]++
             td=document.getElementById(""+pos[0]+pos[1]);
-            td.style.borderBottom="5px solid black";
+            td.style.borderBottom="5px solid white";
         }
     }
 }
@@ -75,9 +79,9 @@ function TiraLetra(){
     posi=Posicao();
     td=document.getElementById(""+pos[0]+posi);
     td.innerHTML="";
-    td.style.borderBottom="5px solid black";
+    td.style.borderBottom="5px solid white";
     td=document.getElementById(""+pos[0]+(posi+1));
-    td.style.borderBottom="2px solid black";
+    td.style.borderBottom="2px solid white";
     pos[1]--;
     console.log(pos);
 }
@@ -111,10 +115,11 @@ function Testa(){
     }
     for(c=0;c<5;c++){
         td=document.getElementById(""+pos[0]+c)
-        if(palavra.indexOf(td.innerHTML)!=-1){
+        posi=palavra.indexOf(td.innerHTML)
+        if(posi!=-1){
             td.style="";
             td.style.backgroundColor="yellow";
-            palavra=palavra.substring(0,c)+palavra[c].toLowerCase()+palavra.substring(c+1);
+            palavra=palavra.substring(0,posi)+palavra[posi].toLowerCase()+palavra.substring(posi+1);
             console.log(palavra);
         }
     }
@@ -145,10 +150,10 @@ function Testa(){
         pos=[pos[0]+1,0];
         for(c=0;c<5;c++){
             td=document.getElementById(""+pos[0]+c);
-            td.style.border="2px solid black";
+            td.style.border="2px solid white";
             td.style.background="transparent";
             if(c==0){
-                td.style.borderBottom="5px solid black";
+                td.style.borderBottom="5px solid white";
             }
         }
         
@@ -159,4 +164,5 @@ var palavras=["carro","comer","fazer","fruta","termo","livro","tabua","porta","l
 CriaTab();
 CriaTeclado();
 SorteiaPalavra();
+
 
