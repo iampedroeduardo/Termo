@@ -116,7 +116,7 @@ function Testa(){
     for(c=0;c<5;c++){
         td=document.getElementById(""+pos[0]+c)
         posi=palavra.indexOf(td.innerHTML)
-        if(posi!=-1){
+        if(posi!=-1 && td.style.backgroundColor!="green"){
             td.style="";
             td.style.backgroundColor="yellow";
             palavra=palavra.substring(0,posi)+palavra[posi].toLowerCase()+palavra.substring(posi+1);
